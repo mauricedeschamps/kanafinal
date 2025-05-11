@@ -445,21 +445,21 @@
         };
 
         const examples = {
-            a: ['あお', 'いえ', 'うえ', 'え', 'おおきい'],
-            ka: ['かばん', 'き', 'くつ', 'けしゴム', 'こども'],
-            ga: ['がっこう', 'ぎんこう', 'ぐんたい', 'げんき', 'ごはん'],
-            sa: ['さかな', 'しんぶん', 'すし', 'せんせい', 'そら'],
-            za: ['ざっし', 'じかん', 'ずかん', 'ぜんぶ', 'ぞう'],
-            ta: ['たべもの', 'ちち', 'つくえ', 'て', 'とけい'],
-            da: ['だいがく', 'ぢしん', 'づか', 'でんわ', 'どうぶつ'],
-            na: ['なつ', 'にほん', 'ぬりえ', 'ねこ', 'のうか'],
-            ha: ['はな', 'ひ', 'ふね', 'へや', 'ほん'],
-            ba: ['ばしょ', 'びょういん', 'ぶどう', 'べんきょう', 'ぼうし'],
-            pa: ['ぱん', 'ぴあの', 'ぷりん', 'ぺん', 'ぽけっと'],
-            ma: ['まど', 'みず', 'むし', 'め', 'もも'],
-            ya: ['やま', '', 'ゆき', '', 'よる'],
-            ra: ['らくだ', 'りんご', 'るす', 'れんしゅう', 'ろく'],
-            wa: ['わに', '', 'を', '', 'ん']
+            a: ['あお (青 - blue)', 'いえ (家 - house)', 'うえ (上 - up)', 'え (絵 - picture)', 'おおきい (大きい - big)'],
+            ka: ['かばん (鞄 - bag)', 'き (木 - tree)', 'くつ (靴 - shoes)', 'けしゴム (消しゴム - eraser)', 'こども (子供 - child)'],
+            ga: ['がっこう (学校 - school)', 'ぎんこう (銀行 - bank)', 'ぐんたい (軍隊 - army)', 'げんき (元気 - healthy)', 'ごはん (ご飯 - meal)'],
+            sa: ['さかな (魚 - fish)', 'しんぶん (新聞 - newspaper)', 'すし (寿司 - sushi)', 'せんせい (先生 - teacher)', 'そら (空 - sky)'],
+            za: ['ざっし (雑誌 - magazine)', 'じかん (時間 - time)', 'ずかん (図鑑 - picture book)', 'ぜんぶ (全部 - all)', 'ぞう (象 - elephant)'],
+            ta: ['たべもの (食べ物 - food)', 'ちち (父 - father)', 'つくえ (机 - desk)', 'て (手 - hand)', 'とけい (時計 - clock)'],
+            da: ['だいがく (大学 - university)', 'ぢしん (地震 - earthquake)', 'づか (塚 - mound)', 'でんわ (電話 - phone)', 'どうぶつ (動物 - animal)'],
+            na: ['なつ (夏 - summer)', 'にほん (日本 - Japan)', 'ぬりえ (塗り絵 - coloring)', 'ねこ (猫 - cat)', 'のうか (農家 - farmer)'],
+            ha: ['はな (花 - flower)', 'ひ (日 - day/sun)', 'ふね (船 - ship)', 'へや (部屋 - room)', 'ほん (本 - book)'],
+            ba: ['ばしょ (場所 - place)', 'びょういん (病院 - hospital)', 'ぶどう (葡萄 - grapes)', 'べんきょう (勉強 - study)', 'ぼうし (帽子 - hat)'],
+            pa: ['ぱん (パン - bread)', 'ぴあの (ピアノ - piano)', 'ぷりん (プリン - pudding)', 'ぺん (ペン - pen)', 'ぽけっと (ポケット - pocket)'],
+            ma: ['まど (窓 - window)', 'みず (水 - water)', 'むし (虫 - insect)', 'め (目 - eye)', 'もも (桃 - peach)'],
+            ya: ['やま (山 - mountain)', '', 'ゆき (雪 - snow)', '', 'よる (夜 - night)'],
+            ra: ['らくだ (ラクダ - camel)', 'りんご (林檎 - apple)', 'るす (留守 - absence)', 'れんしゅう (練習 - practice)', 'ろく (六 - six)'],
+            wa: ['わに (ワニ - crocodile)', '', 'を (particle)', '', 'ん (hiragana "n")']
         };
 
         // DOM elements
@@ -586,9 +586,10 @@
                         const exampleBtn = document.createElement('button');
                         exampleBtn.textContent = currentExamples[index];
                         exampleBtn.addEventListener('click', () => {
+                            const japaneseText = currentExamples[index].split(' (')[0];
                             if (!isSpeaking) {
                                 isSpeaking = true;
-                                speak(currentExamples[index], () => {
+                                speak(japaneseText, () => {
                                     isSpeaking = false;
                                 });
                             }

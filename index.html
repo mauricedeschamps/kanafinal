@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Japanese Kana Learner</title>
-    <!-- ファビコンとホームスクリーンアイコン追加 -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23e74c3c'/><text x='50%' y='60%' font-size='60' text-anchor='middle' fill='white' font-family='Arial'>あ</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23e74c3c'/><text x='50%' y='60%' font-size='60' text-anchor='middle' fill='white' font-family='Arial'>あ</text></svg>">
     <style>
@@ -51,11 +50,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
+            padding: 10px 20px;
             background-color: var(--header-bg);
             margin-bottom: 30px;
             border-radius: 10px;
-            padding: 10px 20px;
         }
 
         .title-container {
@@ -140,7 +138,6 @@
         .kana-detail {
             display: none;
             flex-direction: column;
-            align-items: center;
             width: 100%;
         }
 
@@ -211,7 +208,6 @@
             color: #666;
         }
 
-        /* 追加スタイル */
         .kana-with-romaji {
             display: flex;
             flex-direction: column;
@@ -241,8 +237,9 @@
         .kana-buttons-container {
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
             width: 30%;
+            gap: 10px;
+            margin-left: auto;
         }
 
         .kana-display {
@@ -252,6 +249,8 @@
             justify-content: center;
             width: 70%;
             padding: 20px;
+            position: sticky;
+            top: 20px;
         }
 
         .large-kana {
@@ -268,6 +267,15 @@
             color: #4CAF50;
         }
 
+        .kana-char {
+            width: 70px;
+            height: 70px;
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         @media (max-width: 600px) {
             .detail-container {
                 flex-direction: column;
@@ -275,12 +283,15 @@
             
             .kana-buttons-container {
                 width: 100%;
-                align-items: center;
+                margin-left: 0;
+                order: 2;
             }
             
             .kana-display {
                 width: 100%;
-                order: -1;
+                order: 1;
+                position: static;
+                margin-bottom: 20px;
             }
             
             .large-kana {
@@ -314,57 +325,38 @@
 
         <div id="mainMenu">
             <div class="kana-rows-container">
-                <!-- 1行目: あ行 -->
                 <div class="kana-row">
                     <button class="row-btn" data-row="a"><span class="row-with-romaji">あ <span class="romaji">a</span></span></button>
                 </div>
-                
-                <!-- 2行目: か行、が行 -->
                 <div class="kana-row">
                     <button class="row-btn" data-row="ka"><span class="row-with-romaji">か <span class="romaji">ka</span></span></button>
                     <button class="row-btn" data-row="ga"><span class="row-with-romaji">が <span class="romaji">ga</span></span></button>
                 </div>
-                
-                <!-- 3行目: さ行、ざ行 -->
                 <div class="kana-row">
                     <button class="row-btn" data-row="sa"><span class="row-with-romaji">さ <span class="romaji">sa</span></span></button>
                     <button class="row-btn" data-row="za"><span class="row-with-romaji">ざ <span class="romaji">za</span></span></button>
                 </div>
-                
-                <!-- 4行目: た行、だ行 -->
                 <div class="kana-row">
                     <button class="row-btn" data-row="ta"><span class="row-with-romaji">た <span class="romaji">ta</span></span></button>
                     <button class="row-btn" data-row="da"><span class="row-with-romaji">だ <span class="romaji">da</span></span></button>
                 </div>
-                
-                <!-- 5行目: な行 -->
                 <div class="kana-row">
                     <button class="row-btn" data-row="na"><span class="row-with-romaji">な <span class="romaji">na</span></span></button>
                 </div>
-                
-                <!-- 6行目: は行、ば行、ぱ行 -->
                 <div class="kana-row">
                     <button class="row-btn" data-row="ha"><span class="row-with-romaji">は <span class="romaji">ha</span></span></button>
                     <button class="row-btn" data-row="ba"><span class="row-with-romaji">ば <span class="romaji">ba</span></span></button>
                     <button class="row-btn" data-row="pa"><span class="row-with-romaji">ぱ <span class="romaji">pa</span></span></button>
                 </div>
-                
-                <!-- 7行目: ま行 -->
                 <div class="kana-row">
                     <button class="row-btn" data-row="ma"><span class="row-with-romaji">ま <span class="romaji">ma</span></span></button>
                 </div>
-                
-                <!-- 8行目: や行 -->
                 <div class="kana-row">
                     <button class="row-btn" data-row="ya"><span class="row-with-romaji">や <span class="romaji">ya</span></span></button>
                 </div>
-                
-                <!-- 9行目: ら行 -->
                 <div class="kana-row">
                     <button class="row-btn" data-row="ra"><span class="row-with-romaji">ら <span class="romaji">ra</span></span></button>
                 </div>
-                
-                <!-- 10行目: わ行 -->
                 <div class="kana-row">
                     <button class="row-btn" data-row="wa"><span class="row-with-romaji">わ <span class="romaji">wa</span></span></button>
                 </div>
@@ -380,9 +372,7 @@
                     <div class="large-romaji" id="largeRomajiDisplay"></div>
                 </div>
                 
-                <div class="kana-buttons-container">
-                    <div class="kana-row" id="detailKanaRow"></div>
-                </div>
+                <div class="kana-buttons-container" id="detailKanaRow"></div>
             </div>
             
             <div class="example-sentences">
@@ -436,7 +426,6 @@
             wa: ['ワ', '', 'ヲ', '', 'ン']
         };
 
-        // Romaji for each kana
         const romaji = {
             a: ['a', 'i', 'u', 'e', 'o'],
             ka: ['ka', 'ki', 'ku', 'ke', 'ko'],
@@ -455,23 +444,22 @@
             wa: ['wa', '', 'wo', '', 'n']
         };
 
-        // Example sentences for each row
         const examples = {
-            a: ['あお (青 - blue)', 'いえ (家 - house)', 'うえ (上 - up)', 'え (絵 - picture)', 'おおきい (大きい - big)'],
-            ka: ['かばん (鞄 - bag)', 'き (木 - tree)', 'くつ (靴 - shoes)', 'けしゴム (消しゴム - eraser)', 'こども (子供 - child)'],
-            ga: ['がっこう (学校 - school)', 'ぎんこう (銀行 - bank)', 'ぐんたい (軍隊 - army)', 'げんき (元気 - healthy)', 'ごはん (ご飯 - meal)'],
-            sa: ['さかな (魚 - fish)', 'しんぶん (新聞 - newspaper)', 'すし (寿司 - sushi)', 'せんせい (先生 - teacher)', 'そら (空 - sky)'],
-            za: ['ざっし (雑誌 - magazine)', 'じかん (時間 - time)', 'ずかん (図鑑 - picture book)', 'ぜんぶ (全部 - all)', 'ぞう (象 - elephant)'],
-            ta: ['たべもの (食べ物 - food)', 'ちち (父 - father)', 'つくえ (机 - desk)', 'て (手 - hand)', 'とけい (時計 - clock)'],
-            da: ['だいがく (大学 - university)', 'ぢしん (地震 - earthquake)', 'づか (塚 - mound)', 'でんわ (電話 - phone)', 'どうぶつ (動物 - animal)'],
-            na: ['なつ (夏 - summer)', 'にほん (日本 - Japan)', 'ぬりえ (塗り絵 - coloring)', 'ねこ (猫 - cat)', 'のうか (農家 - farmer)'],
-            ha: ['はな (花 - flower)', 'ひ (日 - day/sun)', 'ふね (船 - ship)', 'へや (部屋 - room)', 'ほん (本 - book)'],
-            ba: ['ばしょ (場所 - place)', 'びょういん (病院 - hospital)', 'ぶどう (葡萄 - grapes)', 'べんきょう (勉強 - study)', 'ぼうし (帽子 - hat)'],
-            pa: ['ぱん (パン - bread)', 'ぴあの (ピアノ - piano)', 'ぷりん (プリン - pudding)', 'ぺん (ペン - pen)', 'ぽけっと (ポケット - pocket)'],
-            ma: ['まど (窓 - window)', 'みず (水 - water)', 'むし (虫 - insect)', 'め (目 - eye)', 'もも (桃 - peach)'],
-            ya: ['やま (山 - mountain)', '', 'ゆき (雪 - snow)', '', 'よる (夜 - night)'],
-            ra: ['らくだ (ラクダ - camel)', 'りんご (林檎 - apple)', 'るす (留守 - absence)', 'れんしゅう (練習 - practice)', 'ろく (六 - six)'],
-            wa: ['わに (ワニ - crocodile)', '', 'を (particle)', '', 'ん (hiragana "n")']
+            a: ['あお', 'いえ', 'うえ', 'え', 'おおきい'],
+            ka: ['かばん', 'き', 'くつ', 'けしゴム', 'こども'],
+            ga: ['がっこう', 'ぎんこう', 'ぐんたい', 'げんき', 'ごはん'],
+            sa: ['さかな', 'しんぶん', 'すし', 'せんせい', 'そら'],
+            za: ['ざっし', 'じかん', 'ずかん', 'ぜんぶ', 'ぞう'],
+            ta: ['たべもの', 'ちち', 'つくえ', 'て', 'とけい'],
+            da: ['だいがく', 'ぢしん', 'づか', 'でんわ', 'どうぶつ'],
+            na: ['なつ', 'にほん', 'ぬりえ', 'ねこ', 'のうか'],
+            ha: ['はな', 'ひ', 'ふね', 'へや', 'ほん'],
+            ba: ['ばしょ', 'びょういん', 'ぶどう', 'べんきょう', 'ぼうし'],
+            pa: ['ぱん', 'ぴあの', 'ぷりん', 'ぺん', 'ぽけっと'],
+            ma: ['まど', 'みず', 'むし', 'め', 'もも'],
+            ya: ['やま', '', 'ゆき', '', 'よる'],
+            ra: ['らくだ', 'りんご', 'るす', 'れんしゅう', 'ろく'],
+            wa: ['わに', '', 'を', '', 'ん']
         };
 
         // DOM elements
@@ -484,9 +472,9 @@
         const backBtn = document.getElementById('backBtn');
         const detailKanaRow = document.getElementById('detailKanaRow');
         const exampleButtons = document.getElementById('exampleButtons');
-        const rowButtons = document.querySelectorAll('.row-btn');
         const largeKanaDisplay = document.getElementById('largeKanaDisplay');
         const largeRomajiDisplay = document.getElementById('largeRomajiDisplay');
+        const rowButtons = document.querySelectorAll('.row-btn');
 
         // Current mode
         let isHiraganaMode = true;
@@ -540,11 +528,10 @@
         function updateRowButtons() {
             rowButtons.forEach(button => {
                 const row = button.getAttribute('data-row');
-                const romajiText = romaji[row][0]; // Get first romaji of the row
+                const romajiText = romaji[row][0];
                 const kanaSet = isHiraganaMode ? hiragana : katakana;
                 const firstKana = kanaSet[row][0];
                 
-                // Update button content
                 const content = `
                     <span class="row-with-romaji">
                         ${firstKana} <span class="romaji">${romajiText}</span>
@@ -574,7 +561,6 @@
                     button.dataset.kana = kana;
                     button.dataset.romaji = currentRomaji[index];
                     
-                    // Create content with kana and romaji
                     const content = document.createElement('div');
                     content.className = 'kana-with-romaji';
                     content.innerHTML = `
@@ -583,12 +569,10 @@
                     `;
                     
                     button.appendChild(content);
-                    button.addEventListener('click', (e) => {
-                        // 大きな表示を更新
+                    button.addEventListener('click', () => {
                         largeKanaDisplay.textContent = kana;
                         largeRomajiDisplay.textContent = currentRomaji[index];
                         
-                        // 音声再生
                         if (!isSpeaking) {
                             isSpeaking = true;
                             speak(kana, () => {
@@ -598,16 +582,13 @@
                     });
                     detailKanaRow.appendChild(button);
 
-                    // Add example sentence if exists
                     if (currentExamples[index]) {
                         const exampleBtn = document.createElement('button');
                         exampleBtn.textContent = currentExamples[index];
                         exampleBtn.addEventListener('click', () => {
-                            // Speak the Japanese part only (before the hyphen)
-                            const japaneseText = currentExamples[index].split(' - ')[0];
                             if (!isSpeaking) {
                                 isSpeaking = true;
-                                speak(japaneseText, () => {
+                                speak(currentExamples[index], () => {
                                     isSpeaking = false;
                                 });
                             }
@@ -617,7 +598,6 @@
                 }
             });
 
-            // 最初の仮名を表示
             if (currentRowKana[0]) {
                 largeKanaDisplay.textContent = currentRowKana[0];
                 largeRomajiDisplay.textContent = currentRomaji[0];
@@ -625,7 +605,6 @@
         }
 
         function speak(text, callback) {
-            // Cancel any ongoing speech
             speechSynthesis.cancel();
             
             const utterance = new SpeechSynthesisUtterance();
@@ -633,14 +612,11 @@
             utterance.lang = 'ja-JP';
             utterance.rate = 0.9;
             
-            // Try to get Japanese voice
             const voices = speechSynthesis.getVoices();
             const japaneseVoice = voices.find(voice => voice.lang === 'ja-JP');
             
             if (japaneseVoice) {
                 utterance.voice = japaneseVoice;
-            } else {
-                console.warn('Japanese voice not found. Using default voice.');
             }
             
             utterance.onend = function() {
@@ -650,11 +626,9 @@
             speechSynthesis.speak(utterance);
         }
 
-        // Initialize voices (needed for some browsers)
+        // Initialize voices
         if (speechSynthesis.onvoiceschanged !== undefined) {
-            speechSynthesis.onvoiceschanged = function() {
-                // Voices are now loaded
-            };
+            speechSynthesis.onvoiceschanged = function() {};
         }
 
         // Initial setup

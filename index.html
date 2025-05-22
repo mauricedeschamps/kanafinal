@@ -312,7 +312,6 @@
     </style>
 </head>
 <body class="dark-mode">
-    <!-- コンテンツ部分は変更なし -->
     <div class="container">
         <header>
             <div class="title-container">
@@ -396,7 +395,6 @@
     </footer>
 
     <script>
-        // データ部分とJavaScriptは変更なし（前回と同じ）
         // Kana data
         const hiragana = {
             a: ['あ', 'い', 'う', 'え', 'お'],
@@ -488,6 +486,25 @@
         let isHiraganaMode = true;
         let currentRow = '';
         let isSpeaking = false;
+        let voicesReady = false;
+
+        // Initialize voices
+        function initializeVoices() {
+            return new Promise((resolve) => {
+                // Chrome needs this workaround
+                const voices = speechSynthesis.getVoices();
+                if (voices.length > 0) {
+                    voicesReady = true;
+                    resolve();
+                    return;
+                }
+
+                speechSynthesis.onvoiceschanged = function() {
+                    voicesReady = true;
+                    resolve();
+                };
+            });
+        }
 
         // Event listeners
         darkModeBtn.addEventListener('click', () => {
@@ -530,6 +547,7 @@
             mainMenu.style.display = 'block';
             kanaDetail.style.display = 'none';
             speechSynthesis.cancel();
+            isSpeaking = false;
         });
 
         // Functions
@@ -580,13 +598,7 @@
                     button.addEventListener('click', () => {
                         largeKanaDisplay.textContent = kana;
                         largeRomajiDisplay.textContent = currentRomaji[index];
-                        
-                        if (!isSpeaking) {
-                            isSpeaking = true;
-                            speak(kana, () => {
-                                isSpeaking = false;
-                            });
-                        }
+                        speak(kana);
                     });
                     detailKanaRow.appendChild(button);
 
@@ -595,12 +607,7 @@
                         exampleBtn.textContent = currentExamples[index];
                         exampleBtn.addEventListener('click', () => {
                             const japaneseText = currentExamples[index].split(' (')[0];
-                            if (!isSpeaking) {
-                                isSpeaking = true;
-                                speak(japaneseText, () => {
-                                    isSpeaking = false;
-                                });
-                            }
+                            speak(japaneseText);
                         });
                         exampleButtons.appendChild(exampleBtn);
                     }
@@ -613,7 +620,12 @@
             }
         }
 
-        function speak(text, callback) {
+        function speak(text) {
+            if (!voicesReady) {
+                console.warn('Voices not ready yet');
+                return;
+            }
+
             speechSynthesis.cancel();
             
             const utterance = new SpeechSynthesisUtterance();
@@ -622,26 +634,41 @@
             utterance.rate = 0.9;
             
             const voices = speechSynthesis.getVoices();
-            const japaneseVoice = voices.find(voice => voice.lang === 'ja-JP');
+            const japaneseVoice = voices.find(voice => 
+                voice.lang === 'ja-JP' || 
+                voice.lang === 'ja' || 
+                voice.name.includes('Japanese')
+            );
             
             if (japaneseVoice) {
                 utterance.voice = japaneseVoice;
+            } else if (voices.length > 0) {
+                // Fallback to any available voice if Japanese not found
+                utterance.voice = voices[0];
+            } else {
+                console.warn('No voices available');
+                return;
             }
             
             utterance.onend = function() {
-                if (callback) callback();
+                isSpeaking = false;
             };
             
+            isSpeaking = true;
             speechSynthesis.speak(utterance);
         }
 
-        // Initialize voices
-        if (speechSynthesis.onvoiceschanged !== undefined) {
-            speechSynthesis.onvoiceschanged = function() {};
-        }
-
         // Initial setup
-        updateRowButtons();
+        initializeVoices().then(() => {
+            updateRowButtons();
+        });
+
+        // Fallback in case voiceschanged doesn't fire
+        setTimeout(() => {
+            if (!voicesReady && speechSynthesis.getVoices().length > 0) {
+                voicesReady = true;
+            }
+        }, 1000);
     </script>
 </body>
 </html>
